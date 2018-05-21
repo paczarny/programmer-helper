@@ -16,8 +16,25 @@ class User extends Password{
 		if(isset($_SESSION['logged']) && $_SESSION['logged'] == true){
 			return true;
 		}
+        else 
+        {
+            return false;
+        }
 	}
+    
+    private function get_user_hash($username){
 
+		try {
+
+			$stmt = $this->_db->prepare('SELECT id_user, username, password FROM users WHERE username = :username');
+			$stmt->execute(array('username' => $username));
+
+			return $stmt->fetch();
+
+		} catch(PDOException $e) {
+		    echo '<p class="error">'.$e->getMessage().'</p>';
+		}
+	}
 
 
 	public function login($username,$password){
@@ -27,10 +44,13 @@ class User extends Password{
 		if($this->password_verify($password,$user['password']) == 1){
 
 		    $_SESSION['logged'] = true;
-		    $_SESSION['memberID'] = $user['memberID'];
+		    $_SESSION['id_user'] = $user['id_user'];
 		    $_SESSION['username'] = $user['username'];
 		    return true;
 		}
+        else{
+            return false;
+        }
 	}
 
 

@@ -1,4 +1,6 @@
 <?php include_once '../Config/config.php';
+
+
 $stmt = $db->prepare('SELECT id_post, postTitle, postCont, postDate FROM posts, post_details where posts.id_post_details=post_details.id_post_details and id_post =:id_post');
 $stmt->execute(array(':id_post' => $_GET['id']));
 $row = $stmt->fetch();

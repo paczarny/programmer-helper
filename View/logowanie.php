@@ -15,13 +15,40 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 </head>
  <body>
 	<div id="container">
-		<form action="">
+    <?php
+    if(isset($_GET['action'])){ 
+		      echo '<h3>Użytkownik '.$_GET['action'].'. Możesz się zalogować.</h3>'; 
+	           } 
+	//process login form if submitted
+	if(isset($_POST['submit'])){
+
+		$username = trim($_POST['username']);
+		$password = trim($_POST['password']);
+		if($user->login($username,$password)){ 
+
+			//logged in return to index page
+
+			header('Location: programmer-helper.php');
+			exit;
+		
+
+		} else {
+			$message = '<p class="error">Wrong username or password</p>';
+		}
+
+	}//end if submit
+
+	if(isset($message)){ echo $message; }
+	?>
+        
+        
+		<form action=""../Controller/controller.php?method="login" method="post">
 			
-			<input type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" >
+			<input type="text" placeholder="login" name="username" onfocus="this.placeholder=''" onblur="this.placeholder='login'" >
 			
-			<input type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" >
+			<input type="password" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" >
 			
-			<input type="submit" value="Zaloguj się">
+			<input type="submit" name="submit" value="Zaloguj się">
 			
 		</form>
     <div class="rejestracja">
