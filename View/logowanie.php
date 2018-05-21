@@ -1,5 +1,5 @@
 <?php include_once '../Config/config.php'; 
-
+if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 </head>
  <body>
 	<div id="container">
-		<form>
+		<form action="">
 			
 			<input type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" >
 			
