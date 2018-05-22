@@ -18,12 +18,29 @@ if($row['id_post'] == ''){
 <body>
 <div class="container">
 
-		<h1>Programmer helper</h1>
+        <h1  style="display: inline;">Programmer helper</h1>
+        <div class="login" style="display: inline;">
+            <?php
+            if($user->is_logged_in()){
+                echo "<a href='wyloguj.php'>Wyloguj się</a>";    
+            }
+            else{
+                 echo "<a href='logowanie.php'>Logowanie & rejestracja</a>";
+            }
+
+            ?>
+        <a href="logowanie.php"><span><?php$desc?></span></a>
+        </div>
 		<hr />
 		<p><a href="index.php">Powrót</a></p>
 
-
+        
 		<?php	
+            if (isset($_SESSION['not_logged']) && !empty($_SESSION['not_logged']))
+			 {
+				echo "Musisz się zalogować żeby skontaktować się z programistą.";
+				unset($_SESSION['not_logged']);
+			 }       
 			echo '<div>';
 				echo '<h1>'.$row['postTitle'].'</h1>';
 				echo '<p>Posted on '.date('jS M Y', strtotime($row['postDate'])).'</p>';

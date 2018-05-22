@@ -5,88 +5,98 @@
 if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 include_once 'header.php'; ?>
 <body>
-	
-
-	<?php
-
-	//if form has been submitted process it
-	if(isset($_POST['submit'])){
-
-		//collect form data
-		extract($_POST);
-
-		//very basic validation
-		if($username ==''){
-			$error[] = 'Please enter the username.';
-		}
-
-		if($password ==''){
-			$error[] = 'Please enter the password.';
-		}
-
-		if($passwordConfirm ==''){
-			$error[] = 'Please confirm the password.';
-		}
-
-		if($password != $passwordConfirm){
-			$error[] = 'Passwords do not match.';
-		}
-
-		if($email ==''){
-			$error[] = 'Please enter the email address.';
-		}
-
-		if(!isset($error)){
-
-			$hashedpassword = $user->password_hash($password, PASSWORD_BCRYPT);
-
-			try {
-
-				//insert into database
-				$stmt = $db->prepare('INSERT INTO users(username,password,email) VALUES (:username, :password, :email)') ;
-				$stmt->execute(array(
-					':username' => $username,
-					':password' => $hashedpassword,
-					':email' => $email
-				));
-
-				//redirect to index page
-				header('Location: logowanie.php?action=dodany');
-				exit;
-
-			} catch(PDOException $e) {
-			    echo $e->getMessage();
+	  
+    <div><a href="logowanie.php">Powrót</a></div>
+	<form action="../Controller/controller.php?method=insertUser" method="post">
+	       
+		Nickname: <br /> <input type="text" value="<?php
+			if (isset($_SESSION['fr_nick']))
+			{
+				echo $_SESSION['fr_nick'];
+				unset($_SESSION['fr_nick']);
 			}
-
-		}
-
-	}
-
-	//check for any errors
-	if(isset($error)){
-		foreach($error as $error){
-			echo '<p class="error">'.$error.'</p>';
-		}
-	}
-	?>
-
-	<form action='' method='post'>
-
-		<p><label>Username</label><br />
-		<input type='text' name='username' value='<?php if(isset($error)){ echo $_POST['username'];}?>'></p>
-
-		<p><label>Password</label><br />
-		<input type='password' name='password' value='<?php if(isset($error)){ echo $_POST['password'];}?>'></p>
-
-		<p><label>Confirm Password</label><br />
-		<input type='password' name='passwordConfirm' value='<?php if(isset($error)){ echo $_POST['passwordConfirm'];}?>'></p>
-
-		<p><label>Email</label><br />
-		<input type='text' name='email' value='<?php if(isset($error)){ echo $_POST['email'];}?>'></p>
+		?>" name="username" /><br />
 		
-		<p><input type='submit' name='submit' value='Add User'></p>
-
+		<?php
+			if (isset($_SESSION['e_nick']))
+			{
+				echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+				unset($_SESSION['e_nick']);
+			}
+		?>
+		
+		E-mail: <br /> <input type="text" value="<?php
+			if (isset($_SESSION['fr_email']))
+			{
+				echo $_SESSION['fr_email'];
+				unset($_SESSION['fr_email']);
+			}
+		?>" name="email" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_email']))
+			{
+				echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+				unset($_SESSION['e_email']);
+			}
+		?>
+		
+		Twoje hasło: <br /> <input type="password"  value="<?php
+			if (isset($_SESSION['fr_haslo1']))
+			{
+				echo $_SESSION['fr_haslo1'];
+				unset($_SESSION['fr_haslo1']);
+			}
+		?>" name="haslo1" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_haslo']))
+			{
+				echo '<div class="error">'.$_SESSION['e_haslo'].'</div>';
+				unset($_SESSION['e_haslo']);
+			}
+		?>		
+		
+		Powtórz hasło: <br /> <input type="password" value="<?php
+			if (isset($_SESSION['fr_haslo2']))
+			{
+				echo $_SESSION['fr_haslo2'];
+				unset($_SESSION['fr_haslo2']);
+			}
+		?>" name="haslo2" /><br />
+		
+		<label>
+			<input type="checkbox" name="regulamin" <?php
+			if (isset($_SESSION['fr_regulamin']))
+			{
+				echo "checked";
+				unset($_SESSION['fr_regulamin']);
+			}
+				?>/> Akceptuję regulamin
+		</label>
+		
+		<?php
+			if (isset($_SESSION['e_regulamin']))
+			{
+				echo '<div class="error">'.$_SESSION['e_regulamin'].'</div>';
+				unset($_SESSION['e_regulamin']);
+			}
+		?>	
+		
+		<div class="g-recaptcha" data-sitekey="PODAJ WŁASNY SITEKEY!"></div>
+		
+		<?php
+			if (isset($_SESSION['e_bot']))
+			{
+				echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+				unset($_SESSION['e_bot']);
+			}
+		?>	
+		
+		<br />
+		
+		<input type="submit" name="submit" value="Zarejestruj się" />
+		
 	</form>
-
 </body>
 </html>

@@ -17,7 +17,7 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 	<div id="container">
     <?php
     if(isset($_GET['action'])){ 
-		      echo '<h3>Użytkownik '.$_GET['action'].'. Możesz się zalogować.</h3>'; 
+        $message = '<p class="error">Użytkownik '.$_GET['action'].'. Możesz się zalogować.</p>';
 	           } 
 	//process login form if submitted
 	if(isset($_POST['submit'])){
@@ -33,7 +33,7 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 		
 
 		} else {
-			$message = '<p class="error">Wrong username or password</p>';
+			$message = '<p class="error">Wrong username or password.</p>';
 		}
 
 	}//end if submit
@@ -52,7 +52,7 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 			
 		</form>
     <div class="rejestracja">
-        <a href="rejestracja.php">Rejestracja</a> 
+        <a href="rejestracja.php">Rejestracja</a> <a href="index.php">Powrót</a> 
     </div>
 	</div>
     

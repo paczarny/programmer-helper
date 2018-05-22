@@ -1,6 +1,9 @@
 <?php include_once '../Config/config.php';
 
-if(!$user->is_logged_in()){ header('Location: index.php'); }
+if(!$user->is_logged_in()){ 
+        $_SESSION['not_logged'] = true;
+        header('Location: concretepost.php?id='.$_GET['id']); 
+}
 
 $stmt = $db->prepare('SELECT id_post, email, username, name, phone, surname, country, city FROM users, user_detail, addresses, posts where posts.id_post=users.id_user and users.id_user=user_detail.id_user_details and user_detail.id_address=addresses.id_address
 and id_post =:id_post');
