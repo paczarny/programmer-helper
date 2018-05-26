@@ -111,6 +111,31 @@ class User extends Password{
                     }
     
     }
+    //wyciągnij z bazy
+    public function select($select='*', $from, $other=NULL, $order=NULL, $limit=NULL) {
+        $query='SELECT '.$select.' FROM '.$from;
+        if($order!=NULL)
+            $query=$query.' ORDER BY '.$order;
+        if($limit!=NULL)
+            $query=$query.' LIMIT '.$limit;
+        try {
+            if($other!=NULL)
+            {
+            $stmt = $this->_db->prepare($query);
+			$stmt->execute(array(':id_post' => $other));
+            }
+            else{
+            $stmt = $this->_db->prepare($query);
+			$stmt->execute();
+            }
+            
+            } 
+        catch(PDOException $e) {
+            echo $e->getMessage();
+        }
+    
+        return $stmt;
+    }
 
 	public function logout(){
 		session_destroy();

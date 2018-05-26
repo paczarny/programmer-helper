@@ -1,5 +1,16 @@
 <?php include_once '../Config/config.php'; 
-if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
+if($user->is_logged_in())
+{ 
+    header('Location: programmer-helper.php'); 
+}
+        
+
+    $select='id_post, postTitle, postDesc, postDate';
+    $from='posts INNER JOIN post_details ON posts.id_post_details=post_details.id_post_details';
+    $order='id_post DESC'; 
+    $stmt=$user->select($select, $from, NULL, $order);
+    $rows=$stmt->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +30,8 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 		<?php 
     
     
-			try {
-                $stmt = $db->query('SELECT id_post, postTitle, postDesc, postDate FROM posts, post_details where posts.id_post_details=post_details.id_post_details ORDER BY id_post DESC ');
-        while($row = $stmt->fetch()){
-            
+
+            foreach ($rows as $row){
             echo '<div>';
                 echo '<h1><a href="concretepost.php?id='.$row['id_post'].'">'.$row['postTitle'].'</a></h1>';
                 echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['postDate'])).'</p>';
@@ -30,11 +39,8 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
                 echo '<p><a href="concretepost.php?id='.$row['id_post'].'">Read More</a></p>';                
             echo '</div>';
 
-        }
+            }
 
-    } catch(PDOException $e) {
-        echo $e->getMessage();
-    }
 		?>
    
 <?php include_once 'footer.php'; ?>

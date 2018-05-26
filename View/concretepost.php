@@ -1,11 +1,14 @@
 <?php include_once '../Config/config.php';
 
+//przygotuj zapytanie
+$select='id_post, postTitle, postCont, postDate';
+$from='posts INNER JOIN post_details ON posts.id_post_details=post_details.id_post_details and id_post =:id_post';
+$rows=$user->select($select, $from, $_GET['id']);
+$row=$rows->fetch();
 
-$stmt = $db->prepare('SELECT id_post, postTitle, postCont, postDate FROM posts, post_details where posts.id_post_details=post_details.id_post_details and id_post =:id_post');
-$stmt->execute(array(':id_post' => $_GET['id']));
-$row = $stmt->fetch();
 
-//if post does not exists redirect user.
+
+//jeśli post nie istnieje
 if($row['id_post'] == ''){
 	header('Location: index.php');
 	exit;
@@ -36,6 +39,7 @@ if($row['id_post'] == ''){
 
         
 		<?php	
+            //jeśli nie zalogowany
             if (isset($_SESSION['not_logged']) && !empty($_SESSION['not_logged']))
 			 {
 				echo "Musisz się zalogować żeby skontaktować się z programistą.";

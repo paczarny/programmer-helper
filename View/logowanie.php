@@ -1,5 +1,8 @@
 <?php include_once '../Config/config.php'; 
-if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
+if($user->is_logged_in())
+{ 
+    header('Location: programmer-helper.php'); 
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +45,7 @@ if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
 	?>
         
         
-		<form action=""../Controller/controller.php?method="login" method="post">
+		<form method="post">
 			
 			<input type="text" placeholder="login" name="username" onfocus="this.placeholder=''" onblur="this.placeholder='login'" >
 			
