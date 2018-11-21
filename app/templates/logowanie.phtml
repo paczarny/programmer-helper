@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="../css/logowanie.css" rel="stylesheet"> 
+    <title>Programmer-helper</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+</head>
+<body>
+	<div id="container">
+
+    <?php
+	if(isset($_SESSION['message']) and ($_SESSION['message']!=''))
+    {   
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+	?>
+        
+        
+		<form method="post" action="/programmer-helper3/public/Login/validation">
+			
+			<input type="text" placeholder="login" name="username" onfocus="this.placeholder=''" onblur="this.placeholder='login'" >
+			
+			<input type="password" name="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='hasło'" >
+			
+
+			<input type="submit" name="submit" value="Zaloguj się">
+		</form>
+        <div class="rejestracja">
+        <a href="/programmer-helper3/public/Register">Rejestracja</a> <a href="/programmer-helper3/public">Powrót</a> 
+    </div>
+	</div>
+    
+	
+
+</body>
+</html>

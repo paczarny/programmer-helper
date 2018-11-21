@@ -4,7 +4,7 @@ if (!defined('PASSWORD_DEFAULT')) {
         define('PASSWORD_DEFAULT', PASSWORD_BCRYPT);
 }
 
-    Class Password {
+    class Password {
 
         public function __construct() {}
 

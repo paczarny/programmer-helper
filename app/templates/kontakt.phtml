@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once 'header.phtml'; ?>
+<body>
+<div class="container">
+    
+    
+    <?php
+    
+    echo '<h1>Dane kontaktowe użytkownika : '.$this->row['username'].'</h1>';
+        $var=$this->row['id_post'];
+    echo '<p><a href="Home/getConcretePost/'.$this->row['id_post'].'">Powrót</a></p>'; 
+    echo "<hr />";
+    
+    echo '<div>';
+
+				echo '<p>'.'Imię : '.$this->row['name'].'</p>';				
+                echo '<p>'.'Nazwisko : '.$this->row['surname'].'</p>';				
+                echo '<p>'.'Adres e-mail : '.$this->row['email'].'</p>';				
+                echo '<p>'.'Telefon : '.$this->row['phone'].'</p>';				
+                echo '<p>'.'Państwo : '.$this->row['country'].'</p>';				
+                echo '<p>'.'Miasto : '.$this->row['city'].'</p>';				
+			    echo '</div>';
+     
+    ?>
+
+		
+		
+   
+<?php include_once 'footer.phtml'; ?>
+</div>
+</body>
+</html>

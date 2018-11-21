@@ -1,13 +1,15 @@
-
-<!DOCTYPE HTML>
-<html>
-<?php include_once '../Config/config.php'; 
-if($user->is_logged_in()){ header('Location: programmer-helper.php'); }
-include_once 'header.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once 'header.phtml'; ?>
 <body>
-	  
-    <div><a href="logowanie.php">Powrót</a></div>
-	<form action="../Controller/controller.php?method=insertUser" method="post">
+    
+<div class="container">
+
+    <h2>Rejestracja w Programmer helper.</h2>
+  
+    <div><a href="/programmer-helper3/public">Powrót</a></div>    
+        
+	<form action="/programmer-helper3/public/Register/validation" method=post>
 	       
 		Nickname: <br /> <input type="text" value="<?php
 			if (isset($_SESSION['fr_nick']))
@@ -98,5 +100,8 @@ include_once 'header.php'; ?>
 		<input type="submit" name="submit" value="Zarejestruj się" />
 		
 	</form>
+
+    
+</div>
 </body>
 </html>

@@ -1,1 +1,0 @@
-<div style="text-align:center">Copywright 2018</div>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once 'header.phtml'; ?>
+<body>
+    
+<div class="container">
+
+    <h2>Aktualizuj dane osobowe.</h2>
+  
+    <div><a href="/programmer-helper3/public">Powrót</a></div>    
+        
+	<form action="/programmer-helper3/public/Edit/validation" method=post>
+	       
+		Imię: <br /> <input type="text" name="name" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_name']))
+			{
+				echo '<div class="error">'.$_SESSION['e_name'].'</div>';
+				unset($_SESSION['e_name']);
+			}
+		?>
+		
+		Nazwisko: <br /> <input type="text" name="surname" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_surname']))
+			{
+				echo '<div class="error">'.$_SESSION['e_surname'].'</div>';
+				unset($_SESSION['e_surname']);
+			}
+		?>
+        
+        Telefon: <br /> <input type="number" name="phone" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_phone']))
+			{
+				echo '<div class="error">'.$_SESSION['e_phone'].'</div>';
+				unset($_SESSION['e_phone']);
+			}
+		?>
+        
+        
+        
+        Państwo: <br /> <input type="text" name="country" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_country']))
+			{
+				echo '<div class="error">'.$_SESSION['e_country'].'</div>';
+				unset($_SESSION['e_country']);
+			}
+		?>
+        
+        
+        
+        Miasto: <br /> <input type="text" name="city" /><br />
+		
+		<?php
+			if (isset($_SESSION['e_city']))
+			{
+				echo '<div class="error">'.$_SESSION['e_city'].'</div>';
+				unset($_SESSION['e_city']);
+			}
+		?>
+		
+		
+		<br />
+		
+		<input type="submit" name="submit" value="Aktualizuj dane" />
+		
+	</form>
+
+    
+</div>
+</body>
+</html>

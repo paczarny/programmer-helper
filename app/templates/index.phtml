@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once 'header.phtml'; ?>
+<body>
+    <div class="container">
+        
+            <h1  style="display: inline;">Programmer helper</h1>
+            <div class="login" style="display: inline;">
+            <?php
+                if((isset($_SESSION['logged'])) and ($_SESSION['logged']==true))
+                {
+                    echo '<a href="/programmer-helper3/public/Login/logout">Wyloguj się </a>';
+                    echo '<a href="/programmer-helper3/public/Profil">Profil</a>';
+                    echo '<a href="/programmer-helper3/public/Add"> Dodaj post</a>';
+                }
+                else
+                {
+                    echo '<a href="/programmer-helper3/public/Login">Zaloguj się</a>';  
+                }
+                ?>
+                </div>
+            <?php
+
+
+        
+        
+        while($row = $this->data->fetch()){
+            
+            echo '<div>';
+                echo '<h1><a href="Home/getConcretePost/'.$row['id_post'].'">'.$row['postTitle'].'</a></h1>';
+                
+            
+                echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row['postDate'])).'</p>';
+                echo '<p>'.$row['postDesc'].'</p>';                
+                echo '<p><a href="Home/getConcretePost/'.$row['id_post'].'">Read More</a></p>';                
+            echo '</div>';
+        }
+    ?>
+        <?php include_once 'footer.phtml'; ?>
+    </div>
+</body>
+    
+</html>
